@@ -2,35 +2,28 @@
 
 ## Wedge Project
 
+This project is an ETL pipeline for data from the Wedge, a Minneapolis-based co-op grocery store. There are transaction files from 2010-01-01 through 2017-01-31 stored as *.csv files, which are processed and loaded to a Google Big Query project. After the files are loaded, they are queried and used to build additional tables to support business operations. 
+
 <!-- Any general commentary you'd like to say about the project --> 
 
 ### Task 1
 
 * Files for this task: 
 <!--  List of file or files here  --> 
-1. Task 1 uploading: task1_second_test.ipynb
-2. Task 1 determining files to clean: task1_testing.ipynb
+`task1_upload.ipynb`: This file contains the code for processing the Wedge zip files, including changing delimiters to ",", adding a header to files where it is missing, and modifying missing/null values so that they are recognized as `NULL`. There is also a cell that extracts each of the *.csv files from their zipped folders and places them into a folder call wedge_extracts. Finally, each of the *.csv files are uploaded to Google Big Query via a pandas dataframe passthrough. 
 
 
-Loads all data into GBQ data set.
-
-`File1 Name`: 
-Description of what this file does.
+`task1_testing.ipynb`: This file contains the code to determine which Wedge *.csv files contain ";" as a delimiter and which lack a header so that we can process through them in `task1_upload.ipynb` and save a little time because we don't have to go through every single one. This code also puts the files that need cleaning into specific folders.
 
 <!--  Repeat for each file  --> 
-
 
 
 ### Task 2
 
 * Files for this task: 
 <!--  List of file or files here  --> 
-1. Task 2: task2.ipynb
 
-Loads all data into GBQ data set.
-
-`File1 Name`: 
-Description of what this file does.
+`task2.ipynb`: This file contains Python code that creates a SQL query, queries the pre-cleaned Wedge files, and creates a sample of the complete records of 420 unique Wedge owners.
 
 <!--  Repeat for each file  --> 
 	
@@ -40,10 +33,7 @@ Description of what this file does.
 * Files for this task: 
 <!--  List of file or files here  --> 
 
-Loads all data into GBQ data set.
-
-`File1 Name`: 
-Description of what this file does.
+`task3.ipynb`: This jupyter notebook first creates a SQLite database called wedge_data2. It then sends a query to Google Big Query, writes the results to a dataframe, then creates a SQLite table from the dataframe for three different queries. 
 
 <!--  Repeat for each file  --> 
 
@@ -85,5 +75,7 @@ When calculating relative difference, use the formula
 | Fraction of Rows from Owners in that Year  | .7372  | .7372  | 0  | 0  |
 
 ## Reflections
+
+Overall, this project taught me that I am firmly on the analysis side of data science. While I would much rather be running models off of the data, I did feel that my Python skills improved throughout this project and I could more easily translate the concepts from my head to the code. This was a good challenge and a little frustrating – I probably uploaded all of my tables to GBQ at least 10 different times throughout the project because I would discover little errors. I felt like the concepts learned were applicable to real-life applications. My code is definitely not idempotent, but it got me from A to B (and hopefully to an A).
 
 <!-- I'd love to get 100-200 words on your experience doing the Wedge Project --> 
